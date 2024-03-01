@@ -1,4 +1,4 @@
-import mongoose, {Mongoose, SchemaDefinition} from "mongoose";
+import mongoose, {Mongoose, SchemaDefinition, Types} from "mongoose";
 
 const Schema = mongoose.Schema;
 
@@ -8,17 +8,20 @@ export const UserSchema = new Schema({
     required: true,
     unique: true,
   },
+  user_id: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
 });
-
-export const UserModel = mongoose.model("users", UserSchema);
 
 export const ExerciseSchema = new Schema({
   username: {
     type: String,
     required: true,
   },
-  userId: {
-    type: String,
+  user_id: {
+    type: Number,
     required: true,
   },
   description: {
@@ -31,23 +34,21 @@ export const ExerciseSchema = new Schema({
   },
   date: {
     type: Date,
-    required: false,
+    default: Date.now,
   },
 });
-
-export const ExerciseModel = mongoose.model("exercises", ExerciseSchema);
 
 export const UserLogsSchema = new Schema({
   username: {
     type: String,
     required: true,
   },
-  count: {
+  user_id: {
     type: Number,
     required: true,
   },
-  _id: {
-    type: String,
+  count: {
+    type: Number,
     required: true,
   },
   log: {
@@ -56,4 +57,7 @@ export const UserLogsSchema = new Schema({
   },
 });
 
-export const UserLogsModel = mongoose.model("user_logs", UserLogsSchema);
+// Export models
+export const User = mongoose.model("users", UserSchema);
+export const Exercise = mongoose.model("exercises", ExerciseSchema);
+export const UserLogs = mongoose.model("user_logs", UserLogsSchema);

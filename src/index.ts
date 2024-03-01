@@ -37,7 +37,8 @@ getApiRoutes(app);
 
 
 // Listener
-const listener = app.listen(appPort, () => serverMsg.listener);
+const listener = app.listen(
+  appPort, () => serverMsg.listener);
 
 // Main function
 const main = async () => {
