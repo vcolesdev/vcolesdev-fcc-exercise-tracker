@@ -32,10 +32,32 @@ export default {
 
       await newUser.save().then(() => {
         console.log("User saved: ", newUser);
-        return res.json(newUser);
       });
 
       if (next) next();
+    },
+    /**
+     * Handle creating a user log entry
+     * @param req
+     * @param res
+     */
+    handleCreateNewUserLogs: async (req: Request, res: Response) => {
+      const {username} = req.body;
+      const currentUser = await User.findOne({"username": username})
+
+      // Create a new user log entry
+      const userLogs = new UserLogs({
+        "username": currentUser && currentUser.username,
+        "user_id": currentUser && currentUser.user_id,
+        "count": 0,
+        "log": [],
+      });
+
+      userLogs.save()
+        .then((logs) => {
+          console.log("User logs saved: ", logs);
+        });
+      return res.json(userLogs);
     },
     /**
      * Handle getting a user by ID
@@ -140,33 +162,6 @@ export default {
       }
       console.log(`Found exercises for user: ${currentUser!.username}: `, userExercises);
       return res.json(userExercises);
-    },
-    /**
-     * Handle creating a user log entry
-     * @param req
-     * @param res
-     */
-    handleCreateNewUserLogs: async (req: Request, res: Response) => {
-      const {username} = req.body;
-
-      await User.findOne({"username": username})
-        .then((user) => {
-          console.log("User found: ", user);
-
-          // Create a new user log entry
-          const userLogs = new UserLogs({
-            "username": user && user.username,
-            "user_id": user && user.user_id,
-            "count": 0,
-            "log": [],
-          });
-
-          userLogs.save()
-            .then((logs) => {
-              console.log("User logs saved: ", logs);
-              return res.json(userLogs);
-            });
-        });
     },
     /**
      * Handle getting user logs

@@ -1,5 +1,6 @@
 import {Express, NextFunction, Request, Response} from "express";
 import UserModule from "../../modules/User";
+import {User} from "../../schema";
 
 const userEvents = UserModule.events;
 
@@ -13,6 +14,26 @@ export default async function getUserApiRoutes(app: Express) {
    * @route /api/users/add_new
    */
   app.post("/api/users/add_new",
+    async function(req: Request, res: Response, next: NextFunction) {
+      const {username} = req.body;
+      if (!username) {
+        return res.status(400).json({"error": "Username is required."});
+      }
+      if (username.length < 3) {
+        return res.status(400).json({"error": "Username must be at least 3 characters."});
+      }
+      if (username.length > 20) {
+        return res.status(400).json({"error": "Username must be less than 20 characters."});
+      }
+      if (typeof username !== "string") {
+        return res.status(400).json({"error": "Username must be a string."});
+      }
+      const existingUser = await User.findOne({"username": username});
+      if (existingUser) {
+        return res.status(400).json({"error": "Username already exists."});
+      }
+      next();
+    },
     async function(req: Request, res: Response, next: NextFunction) {
       await userEvents.handleAddNewUser(req, res, next);
     }, async function(req: Request, res: Response) {
