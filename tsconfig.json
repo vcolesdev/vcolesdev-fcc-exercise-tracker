@@ -1,0 +1,45 @@
+/* Visit https://aka.ms/tsconfig to read more about this file */
+{
+  "compilerOptions": {
+
+    /* Basic Options */
+    "outDir": "./build",
+    "newLine": "lf",
+    "target": "es2017",
+
+    /* Module Resolution */
+    "module": "commonjs",
+    "rootDir": "./src",
+    "moduleResolution": "node10",
+    "baseUrl": "./",
+    "paths": {},
+    "resolveJsonModule": true,
+
+    /* Source Map Options */
+    "allowJs": true,
+    "checkJs": true,
+    "maxNodeModuleJsDepth": 1,
+
+    /* Emit */
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": false,
+    "inlineSourceMap": true,
+    "noEmitOnError": true,
+
+    /* Strict Type-Checking Options */
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+
+    /* Completeness */
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules", "build"]
+}
