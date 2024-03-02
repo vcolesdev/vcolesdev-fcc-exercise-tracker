@@ -1,10 +1,8 @@
-# Vcolesdev - URL Shortener Microservice
+# Vcolesdev - Exercise Tracker
 
-Build a full stack JavaScript app that is functionally similar to this: https://url-shortener-microservice.freecodecamp.rocks.
+Build a full stack JavaScript app that is functionally similar to this: https://exercise-tracker.freecodecamp.rocks.
 
 ## Overview
-
-- This is a URL shortener microservice that takes a URL and returns a shortened URL.
 
 ## Features
 
@@ -18,13 +16,7 @@ Build a full stack JavaScript app that is functionally similar to this: https://
 
 ### To Do
 
-### Troubleshooting
-
-- https://community.auth0.com/t/getting-err-http-headers-sent-when-trying-to-use-requiresauth-with-express-static/60021/8
-
 ## Description
-
-This is a URL shortener microservice.
 
 ## Requirements
 
