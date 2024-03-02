@@ -1,4 +1,4 @@
-import mongoose, {Mongoose, SchemaDefinition, Types} from "mongoose";
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 

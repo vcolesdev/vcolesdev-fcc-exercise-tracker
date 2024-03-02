@@ -1,68 +1,100 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>vcolesdev - Exercise Tracker</title>
-</head>
-<body>
-  <h1>Exercise tracker</h1>
-  <h2>Create User</h2>
-  <form action="/api/users/add_new" id="formAddUser" method="POST">
-    <fieldset>
-      <div>
-        <p>Create new User:</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>vcolesdev - Exercise Tracker</title>
+  </head>
+  <body>
+    <h1>Exercise tracker</h1>
+    <h2>Create User</h2>
+    <form action="/api/users/add_new" id="formAddUser" method="POST">
+      <fieldset>
         <div>
-          <label for="username">Username:</label>
-        </div>
-        <div>
-          <input type="text" name="username" id="username" placeholder="Username" required />
-        </div>
-      </div>
-      <div>
-        <button id="btnAddUser" form="formAddUser" type="submit">
-          <span>Add New User</span>
-        </button>
-      </div>
-    </fieldset>
-  </form>
-  <form action="/api/exercises/add_new" id="formAddExercise" method="POST">
-    <fieldset>
-      <div>
-        <p>Add new Exercise:</p>
-        <div>
+          <p>Create new User:</p>
           <div>
-            <label for="userId">User ID:</label>
+            <label for="username">Username:</label>
           </div>
-          <input type="text" name="userId" id="userId" placeholder="User ID" required />
+          <div>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Username"
+              required
+            />
+          </div>
         </div>
         <div>
+          <button id="btnAddUser" form="formAddUser" type="submit">
+            <span>Add New User</span>
+          </button>
+        </div>
+      </fieldset>
+    </form>
+    <form action="/api/exercises/add_new" id="formAddExercise" method="POST">
+      <fieldset>
+        <div>
+          <p>Add new Exercise:</p>
           <div>
-            <label for="description">Description:</label>
+            <div>
+              <label for="userId">User ID:</label>
+            </div>
+            <input
+              type="text"
+              name="userId"
+              id="userId"
+              placeholder="User ID"
+              required
+            />
           </div>
-          <input type="text" name="description" id="description" placeholder="Description" required />
+          <div>
+            <div>
+              <label for="description">Description:</label>
+            </div>
+            <input
+              type="text"
+              name="description"
+              id="description"
+              placeholder="Description"
+              required
+            />
+          </div>
+          <div>
+            <div>
+              <label for="duration">Duration (mins):</label>
+            </div>
+            <input
+              type="number"
+              name="duration"
+              id="duration"
+              placeholder="Duration"
+              required
+            />
+          </div>
+          <div>
+            <div>
+              <label for="date">Date:</label>
+            </div>
+            <input
+              type="date"
+              name="date"
+              id="date"
+              placeholder="Date"
+              required
+            />
+          </div>
         </div>
         <div>
-          <div>
-            <label for="duration">Duration (mins):</label>
-          </div>
-          <input type="number" name="duration" id="duration" placeholder="Duration" required />
+          <button id="btnAddExercise" form="formAddExercise" type="submit">
+            <span>Add Exercise</span>
+          </button>
         </div>
-        <div>
-          <div>
-            <label for="date">Date:</label>
-          </div>
-          <input type="date" name="date" id="date" placeholder="Date" required />
-        </div>
-      </div>
-      <div>
-        <button id="btnAddExercise" form="formAddExercise" type="submit">
-          <span>Add Exercise</span>
-        </button>
-      </div>
-    </fieldset>
-  </form>
-</body>
+      </fieldset>
+    </form>
+  </body>
 </html>

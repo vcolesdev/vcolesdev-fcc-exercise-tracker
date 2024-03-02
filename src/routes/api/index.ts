@@ -1,10 +1,7 @@
-import {Request, Response, Express, NextFunction} from "express";
-import UserModule from "../../modules/User";
+import { Express } from "express";
 import getUserApiRoutes from "./users";
 import getExerciseApiRoutes from "./exercises";
 import getTestApiRoutes from "./test";
-
-const userEvents = UserModule.events;
 
 const userApiRoutes = getUserApiRoutes;
 const exerciseApiRoutes = getExerciseApiRoutes;

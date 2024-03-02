@@ -1,6 +1,5 @@
-import mongoose from "mongoose";
-import {User, Exercise, UserLogs} from "../schema";
-import {Request, Response, Express, NextFunction} from "express";
+import { User, Exercise, UserLogs } from "../schema";
+import { Request, Response, NextFunction } from "express";
 
 /**
  * User module
@@ -23,11 +22,15 @@ export default {
      * @param res
      * @param next
      */
-    handleAddNewUser: async (req: Request, res: Response, next?: NextFunction) => {
-      const {username} = req.body;
+    handleAddNewUser: async (
+      req: Request,
+      res: Response,
+      next?: NextFunction,
+    ) => {
+      const { username } = req.body;
       const newUser = new User({
-        "username": username,
-        "user_id": Math.floor(Math.random() * 1000),
+        username: username,
+        user_id: Math.floor(Math.random() * 1000),
       });
 
       await newUser.save().then(() => {
@@ -42,21 +45,20 @@ export default {
      * @param res
      */
     handleCreateNewUserLogs: async (req: Request, res: Response) => {
-      const {username} = req.body;
-      const currentUser = await User.findOne({"username": username})
+      const { username } = req.body;
+      const currentUser = await User.findOne({ username: username });
 
       // Create a new user log entry
       const userLogs = new UserLogs({
-        "username": currentUser && currentUser.username,
-        "user_id": currentUser && currentUser.user_id,
-        "count": 0,
-        "log": [],
+        username: currentUser && currentUser.username,
+        user_id: currentUser && currentUser.user_id,
+        count: 0,
+        log: [],
       });
 
-      userLogs.save()
-        .then((logs) => {
-          console.log("User logs saved: ", logs);
-        });
+      userLogs.save().then((logs) => {
+        console.log("User logs saved: ", logs);
+      });
       return res.json(userLogs);
     },
     /**
@@ -65,8 +67,8 @@ export default {
      * @param res
      */
     handleGetUserById: async (req: Request, res: Response) => {
-      const {user_id} = req.params;
-      const user = await User.findOne({user_id: user_id});
+      const { user_id } = req.params;
+      const user = await User.findOne({ user_id: user_id });
       return res.json(user);
     },
     /**
@@ -75,11 +77,15 @@ export default {
      * @param res
      * @param next
      */
-    handleCheckMissingFields: async (req: Request, res: Response, next: NextFunction) => {
-      const {userId, description, duration, date} = req.body;
+    handleCheckMissingFields: async (
+      req: Request,
+      res: Response,
+      next: NextFunction,
+    ) => {
+      const { userId, description, duration, date } = req.body;
       if (!userId || !description || !duration || !date) {
         return res.json({
-          msg: "Missing required fields"
+          msg: "Missing required fields",
         });
       }
       next();
@@ -90,12 +96,16 @@ export default {
      * @param res
      * @param next
      */
-    handleCheckCurrUserById: async (req: Request, res: Response, next: NextFunction) => {
-      const {userId} = req.body;
-      const currentUser = await User.findOne({"user_id": userId});
+    handleCheckCurrUserById: async (
+      req: Request,
+      res: Response,
+      next: NextFunction,
+    ) => {
+      const { userId } = req.body;
+      const currentUser = await User.findOne({ user_id: userId });
       if (!currentUser) {
         return res.json({
-          error: "User not found"
+          error: "User not found",
         });
       }
       next();
@@ -106,12 +116,16 @@ export default {
      * @param res
      * @param next
      */
-    handleCheckExistingUserById: async (req: Request, res: Response, next: NextFunction) => {
-      const {user_id} = req.params;
-      const existingUser = await User.findOne({"user_id": user_id});
+    handleCheckExistingUserById: async (
+      req: Request,
+      res: Response,
+      next: NextFunction,
+    ) => {
+      const { user_id } = req.params;
+      const existingUser = await User.findOne({ user_id: user_id });
       if (!existingUser) {
         return res.json({
-          error: `User with ID: ${user_id} not found in database.`
+          error: `User with ID: ${user_id} not found in database.`,
         });
       }
       next();
@@ -123,18 +137,18 @@ export default {
      */
     handleAddNewExercise: async (req: Request, res: Response) => {
       // Get the request body
-      const {userId, description, duration, date} = req.body;
+      const { userId, description, duration, date } = req.body;
 
       // Get the current user
-      const currentUser = await User.findOne({"user_id": userId});
+      const currentUser = await User.findOne({ user_id: userId });
 
       // Create a new exercise
       const newExercise = new Exercise({
-        "username": currentUser!.username,
-        "user_id": currentUser!.user_id,
-        "description": description,
-        "duration": duration,
-        "date": date,
+        username: currentUser!.username,
+        user_id: currentUser!.user_id,
+        description: description,
+        duration: duration,
+        date: date,
       });
 
       // Save the exercise
@@ -151,16 +165,21 @@ export default {
      * @param res
      */
     handleGetUserExercises: async (req: Request, res: Response) => {
-      const {user_id} = req.params;
-      const currentUser = await User.findOne({"user_id": user_id});
-      const userExercises = await Exercise.find({"username": currentUser!.username});
+      const { user_id } = req.params;
+      const currentUser = await User.findOne({ user_id: user_id });
+      const userExercises = await Exercise.find({
+        username: currentUser!.username,
+      });
       if (!userExercises) {
         return res.json({
           error: `No exercises found for user.`,
-          user: currentUser!.username
+          user: currentUser!.username,
         });
       }
-      console.log(`Found exercises for user: ${currentUser!.username}: `, userExercises);
+      console.log(
+        `Found exercises for user: ${currentUser!.username}: `,
+        userExercises,
+      );
       return res.json(userExercises);
     },
     /**
@@ -169,18 +188,17 @@ export default {
      * @param res
      */
     handleGetUserLogs: async (req: Request, res: Response) => {
-      const {user_id} = req.params;
-      await UserLogs.findOne({"user_id": user_id})
-        .then((logs) => {
-          if (!logs) {
-            return res.json({
-              error: `No logs found for user with id: ${user_id}.`
-            });
-          }
-          console.log(`Logs found for user with id: ${logs.user_id}:`, logs);
-          return res.json(logs);
-        });
+      const { user_id } = req.params;
+      await UserLogs.findOne({ user_id: user_id }).then((logs) => {
+        if (!logs) {
+          return res.json({
+            error: `No logs found for user with id: ${user_id}.`,
+          });
+        }
+        console.log(`Logs found for user with id: ${logs.user_id}:`, logs);
+        return res.json(logs);
+      });
     },
   },
-  fn: {}
-}
+  fn: {},
+};

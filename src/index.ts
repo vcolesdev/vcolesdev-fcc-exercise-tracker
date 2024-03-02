@@ -11,7 +11,7 @@ dotenv.config();
 
 // Config
 const appPort = process.env.PORT || 3000;
-const corsOptions = {optionsSuccessStatus: 200};
+const corsOptions = { optionsSuccessStatus: 200 };
 const mongoURI = process.env.MONGO_URI;
 
 // App
@@ -19,15 +19,17 @@ export const app = express();
 
 // Database
 export const db = mongoose.connect(mongoURI!, {
-  dbName: "freecodecamp"
+  dbName: "freecodecamp",
 });
 
 // Middleware
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(bodyParser.urlencoded({
-  extended: true,
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  }),
+);
 
 app.use(express.static("public"));
 
@@ -35,10 +37,8 @@ app.use(express.static("public"));
 getRoutes(app);
 getApiRoutes(app);
 
-
 // Listener
-const listener = app.listen(
-  appPort, () => serverMsg.listener);
+const listener = app.listen(appPort, () => serverMsg.listener);
 
 // Main function
 const main = async () => {

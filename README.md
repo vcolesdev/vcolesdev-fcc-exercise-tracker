@@ -36,7 +36,7 @@ This is a URL shortener microservice.
 
 - The GET request to `/api/users` returns an array.
 
-- You can POST to `/api/users/:_id/exercises` with form data `description`, `duration`, and optionally `date`. 
+- You can POST to `/api/users/:_id/exercises` with form data `description`, `duration`, and optionally `date`.
 
 - If no `date` is supplied, the current `date` will be used.
 
@@ -57,7 +57,6 @@ This is a URL shortener microservice.
 - The date property of any object in the log array that is returned from GET `/api/users/:_id/logs` should be a string. Use the `dateString` format of the `Date API`.
 
 - You can add from, to and limit parameters to a `GET` `/api/users/:_id/logs` request to retrieve part of the log of any user. from and to are dates in `yyyy-mm-dd` format. limit is an integer of how many logs to send back.
-
 
 ## License
 

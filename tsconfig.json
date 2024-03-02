@@ -1,7 +1,6 @@
 /* Visit https://aka.ms/tsconfig to read more about this file */
 {
   "compilerOptions": {
-
     /* Basic Options */
     "outDir": "./build",
     "newLine": "lf",
@@ -41,5 +40,5 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
-  "exclude": ["node_modules", "build"]
+  "exclude": ["node_modules", "build", "views"]
 }
