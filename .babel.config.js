@@ -1,3 +1,5 @@
+// Docs: https://babeljs.io/docs/en/config-files
+/** @type {import("babel").Config} */
 export default {
   presets: [
     [
