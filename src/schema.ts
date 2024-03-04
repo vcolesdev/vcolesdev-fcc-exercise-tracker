@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema
 
 export const UserSchema = new Schema({
   username: {
@@ -13,7 +13,7 @@ export const UserSchema = new Schema({
     required: true,
     unique: true,
   },
-});
+})
 
 export const ExerciseSchema = new Schema({
   username: {
@@ -36,7 +36,7 @@ export const ExerciseSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-});
+})
 
 export const UserLogsSchema = new Schema({
   username: {
@@ -55,9 +55,9 @@ export const UserLogsSchema = new Schema({
     type: Array,
     required: true,
   },
-});
+})
 
 // Export models
-export const User = mongoose.model("users", UserSchema);
-export const Exercise = mongoose.model("exercises", ExerciseSchema);
-export const UserLogs = mongoose.model("user_logs", UserLogsSchema);
+export const User = mongoose.model("users", UserSchema)
+export const Exercise = mongoose.model("exercises", ExerciseSchema)
+export const UserLogs = mongoose.model("user_logs", UserLogsSchema)

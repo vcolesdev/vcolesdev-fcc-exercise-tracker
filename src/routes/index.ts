@@ -1,13 +1,13 @@
-import paths from "../paths";
-import { Express, Request, Response } from "express";
+import { Express, Request, Response } from "express"
+import paths from "../paths"
 
 // Handle the root route
 const handleRoot = (req: Request, res: Response) => {
   if (!paths.indexFile) {
-    res.status(404).send("Root route not found");
+    res.status(404).send("Root route not found")
   }
-  res.sendFile(paths.indexFile);
-};
+  res.sendFile(paths.indexFile)
+}
 
 /**
  * getRoutes()
@@ -15,7 +15,5 @@ const handleRoot = (req: Request, res: Response) => {
  */
 export default function getRoutes(app: Express) {
   // Routes
-  app.get("/", function (req, res) {
-    return handleRoot(req, res);
-  });
+  app.get("/", (req, res) => handleRoot(req, res))
 }
